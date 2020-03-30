@@ -1,0 +1,77 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#app{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#braille-display{
+    display: flex;
+}
+
+.braille-cell, .braille-cell::after{
+    height: 150px;
+    font-size: 75px;
+    width: 55px;
+    z-index: 1;
+    position: relative;
+    color: wheat;
+    padding: 3em 0 0 0;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+    text-shadow: 0 0 6px rgba(255,255,255,1);
+    transition: opacity 0.4s ease;
+
+
+
+}
+
+.braille-cell::after{
+    opacity: 0.2 !important;
+    position: absolute;
+    color: #a0a0a0;
+    content:'⠿';
+    top: 0;
+    left: 0;
+}
+
+
+.v-enter > div{
+    opacity: 0;
+    transition: opacity 0.4s ease;
+
+
+}
+.v-enter-to > div{
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.v-leave-active{
+    display: none;
+}
+
+.label-letter{
+    font-size: 20px;
+}
+
+input{
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    padding: 10px;
+    background-color: #cecece;
+    text-align: center;
+}
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <transition-group tag="div" id="braille-display">
+        <div :key="i.toString() + message.charAt(i-1)" v-for="i in numberOfCells" class="braille-cell">
+            <div class="braille-letter">{{ brailleAlphabet[message.charAt(i-1)] }}</div>
+            <div class="label-letter">{{ message.charAt(i-1) }}</div>
+        </div>
+
+    </transition-group>
+    <input v-model="message">
+</div>
+
+<script>
+function setCaretPosition(ctrl,pos)
+    {
+        if (ctrl.setSelectionRange)
+        {
+            ctrl.focus();
+            ctrl.setSelectionRange(pos,pos);
+        }
+        else if (ctrl.createTextRange)
+        {
+            var range = ctrl.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', pos);
+            range.moveStart('character', pos);
+            range.select();
+        }
+    }
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: "cancel exams",
+        numberOfCells: "cancel exams".length,
+        brailleAlphabet: {
+            a:'⠁',
+            b:'⠃',
+            c:'⠉',
+            d:'⠙',
+            e:'⠑',
+            f:'⠋',
+            g:'⠛',
+            h:'⠓',
+            i:'⠊',
+            j:'⠚',
+            k:'⠅',
+            l:'⠇',
+            m:'⠍',
+            n:'⠝',
+            o:'⠕',
+            p:'⠏',
+            q:'⠟',
+            r:'⠗',
+            s:'⠎',
+            t:'⠞',
+            u:'⠥',
+            v:'⠧',
+            w:'⠺',
+            x:'⠭',
+            y:'⠽',
+            z:'⠵',
+        },
+    },
+    mounted(){
+        var input = document.querySelector('input');
+        setCaretPosition(input, this.message.length);
+    }
+})
+</script>
+</body>
+</html>
